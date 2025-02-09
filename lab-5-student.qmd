@@ -71,11 +71,140 @@ Detective Wickham reaches out to you...
 ```{r}
 #| label: inspecting-crime-scene-report
 
+# print(crime_scene_report)
+# ls()
+head(crime_scene_report)
+
+# Filter the crime_scene_report table for the murder on January 15, 2018
+crime_report <- crime_scene_report %>%
+  filter(type == "murder", date == 20180115)
+
+print(crime_report)
+
+# Display the relevant crime scene details
+crime_report %>% pull(description)
+
+# print(crime_report)
 ```
 
 
 **Follow the evidence to the person responsible for the murder, building a report as you go.**
 Hint: Make sure you check for interviews with any suspects!
+
+```{r}
+#| label: find_witness
+
+# Find the first witness: Last house on "Northwestern Dr"
+first_witness <- person %>%
+  filter(address_street_name == "Northwestern Dr") %>%
+  arrange(desc(address_number)) %>%
+  slice(1)
+
+# Display the first witness
+first_witness %>% pull(name)
+
+# Find the second witness: Named "Annabel" on "Franklin Ave"
+second_witness <- person %>%
+  filter(address_street_name == "Franklin Ave", str_detect(name, "Annabel"))
+
+# Display the second witness
+second_witness %>% pull(name)
+```
+
+```{r}
+#| label: investigate_witnesses
+
+# Get Morty Schapiro's interview
+morty_interview <- interview %>%
+  filter(person_id == first_witness$id) %>%
+  pull(transcript)
+
+# Display Morty Schapiro's interview
+morty_interview
+
+# Get Annabel Miller's interview
+annabel_interview <- interview %>%
+  filter(person_id == second_witness$id) %>%
+  pull(transcript)
+
+# Display Annabel Miller's interview
+annabel_interview
+
+```
+
+```{r}
+#| label: follow_leads
+
+# Step 1: Find gold members with membership numbers starting with "48Z"
+gold_members <- get_fit_now_member %>%
+  filter(membership_status == "gold", str_starts(id, "48Z"))
+
+# Step 2: Find gold members who checked into the gym on January 9, 2018
+gym_visits <- get_fit_now_check_in %>%
+  filter(check_in_date == 20180109 & membership_id %in% gold_members$id) %>%
+  inner_join(gold_members, by = c("membership_id" = "id"))
+
+# Step 3: Find car owners with a license plate containing "H42W"
+suspects_with_cars <- gym_visits %>%
+  inner_join(person, by = c("person_id" = "id")) %>%
+  inner_join(drivers_license, by = c("license_id" = "id")) %>%
+  filter(str_detect(plate_number, "H42W"))
+
+# Display potential suspect(s)
+# Display the suspect's name and license plate
+suspects_with_cars %>%
+  select(name.y, plate_number, car_make, car_model, age, gender)
+
+```
+```{r}
+#| label: interview_jeremy_bowers
+
+# Check if Jeremy Bowers has an interview record
+bowers_interview <- interview %>%
+  filter(person_id == (person %>% filter(name == "Jeremy Bowers") %>% pull(id)))
+
+# Display the interview transcript (if any)
+bowers_interview %>% pull(transcript)
+
+```
+
+```{r}
+#| label: find_mastermind
+
+# Step 1: Find women with red hair and height between 65 and 67 inches
+potential_suspects <- drivers_license %>%
+  filter(gender == "female", hair_color == "red", height >= 65, height <= 67) %>%
+  inner_join(person, by = c("id" = "license_id"))  # Link drivers to identities
+
+# Step 2: Find which of these suspects own a Tesla Model S
+suspects_with_cars <- potential_suspects %>%
+  filter(car_make == "Tesla", car_model == "Model S")
+
+# Step 3: Find attendees of the SQL Symphony Concert in December 2017
+concert_attendees <- facebook_event_checkin %>%
+  filter(event_name == "SQL Symphony Concert", date >= 20171201, date <= 20171231)
+
+# Step 4: Find which Tesla-driving suspects attended the concert
+suspects_with_concerts <- suspects_with_cars %>%
+  inner_join(concert_attendees, by = c("id" = "person_id"))  # Match attendees to Tesla owners
+
+# Step 5: Check column names after the join
+colnames(suspects_with_concerts)  # Ensure the correct column for grouping
+
+# Step 6: Count attendance for each suspect
+attendance_counts <- suspects_with_concerts %>%
+  group_by(id) %>%  # Ensure correct column name
+  summarise(attendance_count = n())
+
+# Step 7: Find the suspect who attended exactly 3 times
+final_suspect <- attendance_counts %>%
+  filter(attendance_count == 3) %>%
+  inner_join(suspects_with_cars, by = c("id" = "id"))  # Match to full suspect details
+
+# Display the final suspect
+final_suspect %>% select(name, age, hair_color, height, plate_number, car_make, car_model)
+
+```
 
 
 ## And the final suspect is...
