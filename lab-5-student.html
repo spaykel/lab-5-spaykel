@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sammy Paykel">
-<meta name="dcterms.date" content="2025-02-04">
+<meta name="dcterms.date" content="2025-02-09">
 
 <title>Lab 5: Murder in SQL City</title>
 <style>
@@ -3095,7 +3095,10 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#crime-scene-report" id="toc-crime-scene-report" class="nav-link" data-scroll-target="#crime-scene-report">Crime Scene Report</a></li>
   </ul></li>
-  <li><a href="#and-the-final-suspect-is" id="toc-and-the-final-suspect-is" class="nav-link" data-scroll-target="#and-the-final-suspect-is">And the final suspect is…</a></li>
+  <li><a href="#and-the-final-suspect-is" id="toc-and-the-final-suspect-is" class="nav-link" data-scroll-target="#and-the-final-suspect-is">And the final suspect is…</a>
+  <ul class="collapse">
+  <li><a href="#red-korb-who-hired-jeremy-bowers-to-do-her-dirty-work." id="toc-red-korb-who-hired-jeremy-bowers-to-do-her-dirty-work." class="nav-link" data-scroll-target="#red-korb-who-hired-jeremy-bowers-to-do-her-dirty-work.">Red Korb, who hired Jeremy Bowers to do her dirty work.</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -3120,7 +3123,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 4, 2025</p>
+      <p class="date">February 9, 2025</p>
     </div>
   </div>
   
@@ -3182,142 +3185,109 @@ vertical-align: -.125em;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print(crime_scene_report)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ls()</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime_scene_report)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the crime_scene_report table for the murder on January 15, 2018</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>crime_report <span class="ot">&lt;-</span> crime_scene_report <span class="sc">%&gt;%</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&quot;murder&quot;</span>, date <span class="sc">==</span> <span class="dv">20180115</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(crime_report)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the relevant crime scene details</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>crime_report <span class="sc">%&gt;%</span> <span class="fu">pull</span>(description)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># print(crime_report)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime_scene_report)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>crime_report <span class="ot">&lt;-</span> crime_scene_report <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&quot;murder&quot;</span>, date <span class="sc">==</span> <span class="dv">20180115</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>crime_report <span class="sc">|&gt;</span> <span class="fu">pull</span>(description)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(crime_report[<span class="dv">3</span>, <span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p><em>Crime Report: Security footage shows that there were 2 witnesses. The first witness lives at the last house on “Northwestern Dr”. The second witness, named Annabel, lives somewhere on “Franklin Ave”.</em></p>
 <p><strong>Follow the evidence to the person responsible for the murder, building a report as you go.</strong> Hint: Make sure you check for interviews with any suspects!</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the first witness: Last house on &quot;Northwestern Dr&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>first_witness <span class="ot">&lt;-</span> person <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Northwestern Dr&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(address_number)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first witness</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>first_witness <span class="sc">%&gt;%</span> <span class="fu">pull</span>(name)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the second witness: Named &quot;Annabel&quot; on &quot;Franklin Ave&quot;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>second_witness <span class="ot">&lt;-</span> person <span class="sc">%&gt;%</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Franklin Ave&quot;</span>, <span class="fu">str_detect</span>(name, <span class="st">&quot;Annabel&quot;</span>))</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the second witness</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>second_witness <span class="sc">%&gt;%</span> <span class="fu">pull</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>first_witness <span class="ot">&lt;-</span> person <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Northwestern Dr&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(address_number)) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>first_witness <span class="sc">|&gt;</span> <span class="fu">pull</span>(name)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>second_witness <span class="ot">&lt;-</span> person <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Franklin Ave&quot;</span>, <span class="fu">str_detect</span>(name, <span class="st">&quot;Annabel&quot;</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>second_witness <span class="sc">|&gt;</span> <span class="fu">pull</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Our first two witnesses are Morty Schapiro, who lives at the last house on Northwestern Dr, and Annabel Miller, who lives on Franklin Ave</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Morty Schapiro&#39;s interview</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>morty_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> first_witness<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Morty Schapiro&#39;s interview</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>morty_interview</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Annabel Miller&#39;s interview</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>annabel_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> second_witness<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Annabel Miller&#39;s interview</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>annabel_interview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>morty_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> first_witness<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>morty_interview</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>annabel_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> second_witness<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>annabel_interview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Interviews from the suspects: <br> <em>“I heard a gunshot and then saw a man run out. He had a &quot;Get Fit Now Gym&quot; bag. The membership number on the bag started with &quot;48Z&quot;. Only gold members have those bags. The man got into a car with a plate that included &quot;H42W&quot;.”</em> <br> <em>“I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th.”</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Find gold members with membership numbers starting with &quot;48Z&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gold_members <span class="ot">&lt;-</span> get_fit_now_member <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(membership_status <span class="sc">==</span> <span class="st">&quot;gold&quot;</span>, <span class="fu">str_starts</span>(id, <span class="st">&quot;48Z&quot;</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Find gold members who checked into the gym on January 9, 2018</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>gym_visits <span class="ot">&lt;-</span> get_fit_now_check_in <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(check_in_date <span class="sc">==</span> <span class="dv">20180109</span> <span class="sc">&amp;</span> membership_id <span class="sc">%in%</span> gold_members<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(gold_members, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;membership_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Find car owners with a license plate containing &quot;H42W&quot;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> gym_visits <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;person_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(drivers_license, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;license_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_number, <span class="st">&quot;H42W&quot;</span>))</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Display potential suspect(s)</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the suspect&#39;s name and license plate</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="sc">%&gt;%</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name.y, plate_number, car_make, car_model, age, gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gold_members <span class="ot">&lt;-</span> get_fit_now_member <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(membership_status <span class="sc">==</span> <span class="st">&quot;gold&quot;</span>, <span class="fu">str_starts</span>(id, <span class="st">&quot;48Z&quot;</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>gym_visits <span class="ot">&lt;-</span> get_fit_now_check_in <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(check_in_date <span class="sc">==</span> <span class="dv">20180109</span> <span class="sc">&amp;</span> membership_id <span class="sc">%in%</span> gold_members<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(gold_members, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;membership_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> gym_visits <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;person_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(drivers_license, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;license_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_number, <span class="st">&quot;H42W&quot;</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="sc">|&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name.y, plate_number, car_make, car_model, age, gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Following this lead already gets us to the killer: Jeremy Bowers</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if Jeremy Bowers has an interview record</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> (person <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;Jeremy Bowers&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id)))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the interview transcript (if any)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="sc">%&gt;%</span> <span class="fu">pull</span>(transcript)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> (person <span class="sc">|&gt;</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;Jeremy Bowers&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(id)))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="sc">|&gt;</span> <span class="fu">pull</span>(transcript)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Interviewing Jeremy Bowers reveals that the buck doesn’t stop with him: <em>“I was hired by a woman with a lot of money. I don’t know her name but I know she’s around 5’5&quot; (65&quot;) or 5’7&quot; (67&quot;). She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017.”</em> <br><br> There’s a mastermind behind this operation; let’s try to find them.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Find women with red hair and height between 65 and 67 inches</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>potential_suspects <span class="ot">&lt;-</span> drivers_license <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, hair_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>, height <span class="sc">&gt;=</span> <span class="dv">65</span>, height <span class="sc">&lt;=</span> <span class="dv">67</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;license_id&quot;</span>))  <span class="co"># Link drivers to identities</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Find which of these suspects own a Tesla Model S</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> potential_suspects <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(car_make <span class="sc">==</span> <span class="st">&quot;Tesla&quot;</span>, car_model <span class="sc">==</span> <span class="st">&quot;Model S&quot;</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Find attendees of the SQL Symphony Concert in December 2017</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>concert_attendees <span class="ot">&lt;-</span> facebook_event_checkin <span class="sc">%&gt;%</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(event_name <span class="sc">==</span> <span class="st">&quot;SQL Symphony Concert&quot;</span>, date <span class="sc">&gt;=</span> <span class="dv">20171201</span>, date <span class="sc">&lt;=</span> <span class="dv">20171231</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Find which Tesla-driving suspects attended the concert</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>suspects_with_concerts <span class="ot">&lt;-</span> suspects_with_cars <span class="sc">%&gt;%</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(concert_attendees, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;person_id&quot;</span>))  <span class="co"># Match attendees to Tesla owners</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Check column names after the join</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(suspects_with_concerts)  <span class="co"># Ensure the correct column for grouping</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Count attendance for each suspect</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>attendance_counts <span class="ot">&lt;-</span> suspects_with_concerts <span class="sc">%&gt;%</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span>  <span class="co"># Ensure correct column name</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">attendance_count =</span> <span class="fu">n</span>())</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 7: Find the suspect who attended exactly 3 times</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>final_suspect <span class="ot">&lt;-</span> attendance_counts <span class="sc">%&gt;%</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance_count <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(suspects_with_cars, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))  <span class="co"># Match to full suspect details</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the final suspect</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>final_suspect <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, age, hair_color, height, plate_number, car_make, car_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> mastermind <span class="ot">&lt;-</span> drivers_license <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         car_make <span class="sc">==</span> <span class="st">&quot;Tesla&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         car_model <span class="sc">==</span> <span class="st">&quot;Model S&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         hair_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>         (height <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;65&quot;</span>, <span class="st">&quot;67&quot;</span>))) </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>mastermind_name <span class="ot">&lt;-</span> mastermind <span class="sc">|&gt;</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;license_id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>mastermind_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 </section>
 <section id="and-the-final-suspect-is" class="level2">
 <h2 class="anchored" data-anchor-id="and-the-final-suspect-is">And the final suspect is…</h2>
-<p><em>Put the name of the person responsible for the murder here:</em></p>
+<section id="red-korb-who-hired-jeremy-bowers-to-do-her-dirty-work." class="level3">
+<h3 class="anchored" data-anchor-id="red-korb-who-hired-jeremy-bowers-to-do-her-dirty-work.">Red Korb, who hired Jeremy Bowers to do her dirty work.</h3>
+<p><br> <em>Sources Used:</em> https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf</p>
 <!-- -->
 
+</section>
 </section>
 
 </main>
@@ -3796,7 +3766,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Lab 5: Murder in SQL City&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Sammy Paykel&quot;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2/4/2025&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;2/9/2025&quot;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    self-contained: true</span></span>
@@ -3837,174 +3807,142 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>You may find the <span class="in">`pull()`</span> function handy for displaying each clue as you go along.</span>
 <span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Access the Data</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>This code chunk will read in all of the tables of data for you. Don&#39;t modify or remove this!</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-in-data</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co"># If purrr is not detected, install the package</span></span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;purrr&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) <span class="fu">install.packages</span>(<span class="st">&quot;purrr&quot;</span>)</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/atheobold/groupworthy-data-science/main/labs/instructions/lab-5-setup.R&quot;</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solve the Crime</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### Crime Scene Report</span></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>Detective Wickham reaches out to you...</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; A crime has taken place and I need your help! There was a murder in SQL City sometime on January 15, 2018. Could you retrieve the crime scene report from the police department’s database and follow the clues to find the person responsible for the murder?!</span></span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inspecting-crime-scene-report</span></span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="co"># print(crime_scene_report)</span></span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="co"># ls()</span></span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime_scene_report)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Access the Data</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>This code chunk will read in all of the tables of data for you. Don&#39;t modify or remove this!</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-in-data</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="co"># If purrr is not detected, install the package</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;purrr&quot;</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()) <span class="fu">install.packages</span>(<span class="st">&quot;purrr&quot;</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/atheobold/groupworthy-data-science/main/labs/instructions/lab-5-setup.R&quot;</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solve the Crime</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### Crime Scene Report</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>Detective Wickham reaches out to you...</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; A crime has taken place and I need your help! There was a murder in SQL City sometime on January 15, 2018. Could you retrieve the crime scene report from the police department’s database and follow the clues to find the person responsible for the murder?!</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inspecting-crime-scene-report</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime_scene_report)</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>crime_report <span class="ot">&lt;-</span> crime_scene_report <span class="sc">|&gt;</span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&quot;murder&quot;</span>, date <span class="sc">==</span> <span class="dv">20180115</span>)</span>
 <span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the crime_scene_report table for the murder on January 15, 2018</span></span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>crime_report <span class="ot">&lt;-</span> crime_scene_report <span class="sc">%&gt;%</span></span>
-<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&quot;murder&quot;</span>, date <span class="sc">==</span> <span class="dv">20180115</span>)</span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(crime_report)</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>crime_report <span class="sc">|&gt;</span> <span class="fu">pull</span>(description)</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(crime_report[<span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>*Crime Report: Security footage shows that there were 2 witnesses. The first witness lives at the last house on &quot;Northwestern Dr&quot;. The second witness, named Annabel, lives somewhere on &quot;Franklin Ave&quot;.*</span>
 <span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the relevant crime scene details</span></span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>crime_report <span class="sc">%&gt;%</span> <span class="fu">pull</span>(description)</span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>**Follow the evidence to the person responsible for the murder, building a report as you go.**</span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>Hint: Make sure you check for interviews with any suspects!</span>
 <span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="co"># print(crime_report)</span></span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>**Follow the evidence to the person responsible for the murder, building a report as you go.**</span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>Hint: Make sure you check for interviews with any suspects!</span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: find_witness</span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: find_witness</span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a>first_witness <span class="ot">&lt;-</span> person <span class="sc">|&gt;</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Northwestern Dr&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(address_number)) <span class="sc">|&gt;</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>first_witness <span class="sc">|&gt;</span> <span class="fu">pull</span>(name)</span>
 <span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the first witness: Last house on &quot;Northwestern Dr&quot;</span></span>
-<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>first_witness <span class="ot">&lt;-</span> person <span class="sc">%&gt;%</span></span>
-<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Northwestern Dr&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(address_number)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>second_witness <span class="ot">&lt;-</span> person <span class="sc">|&gt;</span></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Franklin Ave&quot;</span>, <span class="fu">str_detect</span>(name, <span class="st">&quot;Annabel&quot;</span>))</span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>second_witness <span class="sc">|&gt;</span> <span class="fu">pull</span>(name)</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first witness</span></span>
-<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>first_witness <span class="sc">%&gt;%</span> <span class="fu">pull</span>(name)</span>
-<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the second witness: Named &quot;Annabel&quot; on &quot;Franklin Ave&quot;</span></span>
-<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>second_witness <span class="ot">&lt;-</span> person <span class="sc">%&gt;%</span></span>
-<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(address_street_name <span class="sc">==</span> <span class="st">&quot;Franklin Ave&quot;</span>, <span class="fu">str_detect</span>(name, <span class="st">&quot;Annabel&quot;</span>))</span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>Our first two witnesses are Morty Schapiro, who lives at the last house on Northwestern Dr, and Annabel Miller, who lives on Franklin Ave</span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: investigate_witnesses</span></span>
 <span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the second witness</span></span>
-<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>second_witness <span class="sc">%&gt;%</span> <span class="fu">pull</span>(name)</span>
-<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>morty_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> first_witness<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
 <span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: investigate_witnesses</span></span>
-<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Morty Schapiro&#39;s interview</span></span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>morty_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> first_witness<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Morty Schapiro&#39;s interview</span></span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>morty_interview</span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>morty_interview</span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a>annabel_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> second_witness<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>annabel_interview</span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>Interviews from the suspects: &lt;br&gt;</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>*&quot;I heard a gunshot and then saw a man run out. He had a \&quot;Get Fit Now Gym\&quot; bag. The membership number on the bag started with \&quot;48Z\&quot;. Only gold members have those bags. The man got into a car with a plate that included \&quot;H42W\&quot;.&quot;* &lt;br&gt;</span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>*&quot;I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th.&quot;*</span>
 <span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Annabel Miller&#39;s interview</span></span>
-<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>annabel_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> second_witness<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(transcript)</span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: follow_leads</span></span>
 <span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Annabel Miller&#39;s interview</span></span>
-<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>annabel_interview</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>gold_members <span class="ot">&lt;-</span> get_fit_now_member <span class="sc">|&gt;</span></span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(membership_status <span class="sc">==</span> <span class="st">&quot;gold&quot;</span>, <span class="fu">str_starts</span>(id, <span class="st">&quot;48Z&quot;</span>))</span>
 <span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: follow_leads</span></span>
-<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Find gold members with membership numbers starting with &quot;48Z&quot;</span></span>
-<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>gold_members <span class="ot">&lt;-</span> get_fit_now_member <span class="sc">%&gt;%</span></span>
-<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(membership_status <span class="sc">==</span> <span class="st">&quot;gold&quot;</span>, <span class="fu">str_starts</span>(id, <span class="st">&quot;48Z&quot;</span>))</span>
-<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Find gold members who checked into the gym on January 9, 2018</span></span>
-<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>gym_visits <span class="ot">&lt;-</span> get_fit_now_check_in <span class="sc">%&gt;%</span></span>
-<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(check_in_date <span class="sc">==</span> <span class="dv">20180109</span> <span class="sc">&amp;</span> membership_id <span class="sc">%in%</span> gold_members<span class="sc">$</span>id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(gold_members, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;membership_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))</span>
-<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Find car owners with a license plate containing &quot;H42W&quot;</span></span>
-<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> gym_visits <span class="sc">%&gt;%</span></span>
-<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;person_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(drivers_license, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;license_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_number, <span class="st">&quot;H42W&quot;</span>))</span>
-<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Display potential suspect(s)</span></span>
-<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the suspect&#39;s name and license plate</span></span>
-<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="sc">%&gt;%</span></span>
-<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name.y, plate_number, car_make, car_model, age, gender)</span>
-<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: interview_jeremy_bowers</span></span>
-<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if Jeremy Bowers has an interview record</span></span>
-<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="ot">&lt;-</span> interview <span class="sc">%&gt;%</span></span>
-<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> (person <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;Jeremy Bowers&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id)))</span>
-<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the interview transcript (if any)</span></span>
-<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="sc">%&gt;%</span> <span class="fu">pull</span>(transcript)</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a>gym_visits <span class="ot">&lt;-</span> get_fit_now_check_in <span class="sc">|&gt;</span></span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(check_in_date <span class="sc">==</span> <span class="dv">20180109</span> <span class="sc">&amp;</span> membership_id <span class="sc">%in%</span> gold_members<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(gold_members, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;membership_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> gym_visits <span class="sc">|&gt;</span></span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;person_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(drivers_license, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;license_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(plate_number, <span class="st">&quot;H42W&quot;</span>))</span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="sc">|&gt;</span></span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name.y, plate_number, car_make, car_model, age, gender)</span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>Following this lead already gets us to the killer: Jeremy Bowers</span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: interview_jeremy_bowers</span></span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="ot">&lt;-</span> interview <span class="sc">|&gt;</span></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(person_id <span class="sc">==</span> (person <span class="sc">|&gt;</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;Jeremy Bowers&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(id)))</span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>bowers_interview <span class="sc">|&gt;</span> <span class="fu">pull</span>(transcript)</span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a>Interviewing Jeremy Bowers reveals that the buck doesn&#39;t stop with him: *&quot;I was hired by a woman with a lot of money. I don&#39;t know her name but I know she&#39;s around 5&#39;5\&quot; (65\&quot;) or 5&#39;7\&quot; (67\&quot;). She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017.&quot;* &lt;br&gt;&lt;br&gt;</span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a>There&#39;s a mastermind behind this operation; let&#39;s try to find them.</span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: find_mastermind</span></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a> mastermind <span class="ot">&lt;-</span> drivers_license <span class="sc">|&gt;</span></span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, </span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>         car_make <span class="sc">==</span> <span class="st">&quot;Tesla&quot;</span>,</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a>         car_model <span class="sc">==</span> <span class="st">&quot;Model S&quot;</span>,</span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a>         hair_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a>         (height <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;65&quot;</span>, <span class="st">&quot;67&quot;</span>))) </span>
 <span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: find_mastermind</span></span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>mastermind_name <span class="ot">&lt;-</span> mastermind <span class="sc">|&gt;</span> </span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;license_id&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name)</span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>mastermind_name</span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Find women with red hair and height between 65 and 67 inches</span></span>
-<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>potential_suspects <span class="ot">&lt;-</span> drivers_license <span class="sc">%&gt;%</span></span>
-<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, hair_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>, height <span class="sc">&gt;=</span> <span class="dv">65</span>, height <span class="sc">&lt;=</span> <span class="dv">67</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(person, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;license_id&quot;</span>))  <span class="co"># Link drivers to identities</span></span>
-<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Find which of these suspects own a Tesla Model S</span></span>
-<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>suspects_with_cars <span class="ot">&lt;-</span> potential_suspects <span class="sc">%&gt;%</span></span>
-<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(car_make <span class="sc">==</span> <span class="st">&quot;Tesla&quot;</span>, car_model <span class="sc">==</span> <span class="st">&quot;Model S&quot;</span>)</span>
-<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Find attendees of the SQL Symphony Concert in December 2017</span></span>
-<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>concert_attendees <span class="ot">&lt;-</span> facebook_event_checkin <span class="sc">%&gt;%</span></span>
-<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(event_name <span class="sc">==</span> <span class="st">&quot;SQL Symphony Concert&quot;</span>, date <span class="sc">&gt;=</span> <span class="dv">20171201</span>, date <span class="sc">&lt;=</span> <span class="dv">20171231</span>)</span>
-<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Find which Tesla-driving suspects attended the concert</span></span>
-<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>suspects_with_concerts <span class="ot">&lt;-</span> suspects_with_cars <span class="sc">%&gt;%</span></span>
-<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(concert_attendees, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;person_id&quot;</span>))  <span class="co"># Match attendees to Tesla owners</span></span>
-<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Check column names after the join</span></span>
-<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(suspects_with_concerts)  <span class="co"># Ensure the correct column for grouping</span></span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Count attendance for each suspect</span></span>
-<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>attendance_counts <span class="ot">&lt;-</span> suspects_with_concerts <span class="sc">%&gt;%</span></span>
-<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span>  <span class="co"># Ensure correct column name</span></span>
-<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">attendance_count =</span> <span class="fu">n</span>())</span>
-<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 7: Find the suspect who attended exactly 3 times</span></span>
-<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a>final_suspect <span class="ot">&lt;-</span> attendance_counts <span class="sc">%&gt;%</span></span>
-<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(attendance_count <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(suspects_with_cars, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))  <span class="co"># Match to full suspect details</span></span>
-<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the final suspect</span></span>
-<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a>final_suspect <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, age, hair_color, height, plate_number, car_make, car_model)</span>
-<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a><span class="fu">## And the final suspect is...</span></span>
-<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>*Put the name of the person responsible for the murder here:*</span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## And the final suspect is...</span></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### Red Korb, who hired Jeremy Bowers to do her dirty work.</span></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a>*Sources Used:*</span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a>https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
